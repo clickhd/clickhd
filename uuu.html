@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> New Document </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+ </HEAD>
+
+<body>
+<form name=f>
+ <select name=sel size=5 multiple><!--셀렉트 상자의 속성을 멀티플로 지정-->
+ </select>
+ <input type=button onclick=addItem() value=추가>
+ <input type=button onclick=delItem() value=삭제>
+</form>
+<script>
+ function addItem(){//옵션항목을 추가하는 함수
+  var t=prompt("항목의 내용을 입력하세요","");
+  addIdx=document.f.sel.options.length;
+  newItem=new Option(t);
+  document.f.sel.options[addIdx]=newItem;
+ }
+ function delItem(){//옵션항목을 제거하는 함수
+  if(document.f.sel.selectedIndex!=-1)
+  document.f.sel.options[document.f.sel.selectedIndex]=null;
+ }
+</script>
+
+  
+ </BODY>
+</HTML>

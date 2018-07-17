@@ -1,0 +1,157 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ks_c_5601-1987">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>OfficeTutor 칼럼 - 곽승주님의 오튜공구함 제작으로 
+배워보는 VBA 이야기 </title>
+<link rel="stylesheet" href="http://officetutor.com/css/tutor.css">
+<meta name="Microsoft Border" content="b">
+</head>
+
+<body class="tdcont" topmargin="0" marginheight="0" leftmargin="0" marginwidth="0"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><!--msnavigation--><td valign="top">
+
+<table border="0" width="643" cellpadding="2" style="border-collapse: collapse" bordercolor="#111111" cellspacing="0">
+  <tr>       
+    <td width="642" valign="top" colspan="2"><br>      
+    </td>       
+  </tr>          
+  <tr>       
+    <td width="128" valign="top"></td>       
+    <td width="588" valign="top" class="tdcont">       
+      <p><font size="4" color="#000080"><b>9. 날짜 서식 변경</b></font><p><a href="mailto:kyungsoo@officetutor.com" target="_top">               
+      <img border="0" src="../../images/tit_point.gif" width="13" height="12"></a>   
+      자료다운로드 : <a target="_blank" href="http://www.officetutor.com/bbs/CrazyWWWBoard.cgi?db=pds&amp;mode=download&amp;num=149&amp;file=오튜공구함009.xls">오튜공구함009.xls&nbsp;</a><br>          
+      <br> 
+      안녕하세요! 오튜가족 여러분<br> 
+      <br>
+      오늘은 날짜서식을 변경하는 모듈을 만들 차례입니다. 표시형식을 바꾸는 핵심코드는 
+      .<b>NumberFormat</b> 속성입니다. 마이크로소프트 엑셀의 도움말을 살펴보면 다음과 같은 예제코드가 있습니다.<br> 
+      Worksheets(&quot;Sheet1&quot;).Range(&quot;A17&quot;).<b>NumberFormat</b> = "일반"<br> 
+      Worksheets(&quot;Sheet1&quot;).Rows(1).<b>NumberFormat</b> = "hh:mm:ss"<br> 
+      Worksheets("Sheet1").Columns("C"). <b> NumberFormat</b> = "$#,##0.00_);[빨강]($#,##0.00)"<br> 
+      <br>
+      1번째 예제코드는 [셀 서식]대화상자의 [표시 형식]탭에서 "일반"을 선택한 것과 같은 효과를 줍니다. 2번째 예제코드는 시간을 표시하는 예입니다. 3번째 예제코드는 소수점2자리를 가지고 천단위마다 컴마를 찍고 통화표시(달러)를 합니다. 그리고 음수인 경우 빨강색으로 표시하고 괄호안에 표시합니다.<br> 
+      <br>
+      여기에서는 날짜서식을 변경할 것입니다. 날짜 서식을 변경하려면 연도를 의미하는 "Y", 월을 의미하는 "M", 일자를 의미하는 "D"를 사용하여 서식을 만들게 됩니다. 따라서 "YYYY"는 연도를 네자리(1999,2000,2001등등)로 표시하고 "YY"이면 연도의 끝 두자리만 표시하게 됩니다. "MM"이면 두자리 숫자로 월을 표시합니다. "MMM"이면 Jan,Feb,Mar등등 영문약자 
+      세 자리로 월을 표시합니다.                   
+      </p>         
+      <p><img border="0" src="img\ot009_1.gif" width="158" height="351">                  
+      </p>         
+      <table border="1" cellspacing="0" width="100%" bordercolorlight="#000080" cellpadding="0" bordercolordark="#FFFFFF">
+        <tr>
+          <td width="100%"><b>frmDate유저폼코드</b></td>
+        </tr>
+        <tr>
+          <td width="100%">Option Explicit<br> 
+            <br>
+            Private Sub InitDateType()<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp; With lstDateType<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YYYY-MM-DD"<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YYYY-M-D"<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YYYY년 MM월 DD일"<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YYYY년 MM月 DD日"<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YY-MM-DD"<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YY-M-D"<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YY년 MM월 DD일"<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YY년 MM月 DD日"<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp; End With<br> 
+            End Sub<br> 
+            <br>
+            Private Sub btnCancel_Click()<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp; Unload Me<br> 
+            End Sub<br> 
+            <br>
+            Private Sub lstDateType_DblClick(ByVal Cancel As MSForms.ReturnBoolean)<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp; Selection.NumberFormat = lstDateType.Text<br> 
+            End Sub<br> 
+            <br>
+            Private Sub UserForm_Initialize()<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp; InitDateType<br>
+            End Sub</td> 
+        </tr>
+      </table>
+      <p>위의 코드가 전부인데 상당히 간단하죠! 주요 프로시져를 설명드리자면&nbsp;<br>
+      Private Sub InitDateType()는 AddItem메소드를 사용하여 목록상자에 날짜서식항목을 추가하는 프로시져입니다.  이러한 프로시져는 Private Sub UserForm_Initialize()에서 사용합니다.&nbsp;<br>
+      <br>
+      Private Sub InitDateType()<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp; With lstDateType<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YYYY-MM-DD"<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YYYY-M-D"<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YYYY년 MM월 DD일"<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YYYY년 MM月 DD日"<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YY-MM-DD"<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YY-M-D"<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YY년 MM월 DD일"<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .AddItem "YY년 MM月 DD日"<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp; End With<br> 
+      End Sub<br> 
+      <br>
+      Private Sub UserForm_Initialize()는 유저폼이 처음 실행되면서 시작되는 이벤트프로시져입니다.&nbsp;<br>
+      Private Sub UserForm_Initialize()<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp; InitDateType<br>
+      End Sub<br> 
+      <br>
+      Private Sub lstDateType_DblClick()는 목록상자(상자이름은 lstDateType입니다) 의 항목을 
+      더블 클릭할떄 실행되는 프로시져입니다. 이 프로시져는 이 유저폼의 핵심입니다.<br> 
+      Private Sub lstDateType_DblClick(ByVal Cancel As MSForms.ReturnBoolean)<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp; <b>Selection.NumberFormat = lstDateType.Text<br> 
+      </b>End Sub<br> 
+      프로시져의 내용을 살펴보면 선택한 서식항목(<b>lstDateType.Text</b>)의 텍스트를 현재 선택영역의 NumberFormat속성에 지정하게 됩니다.&nbsp;<br>
+      <br>
+      여기에 추가하자면 Private Sub InitDateType()에 자신이 자주 사용하는 여러 가지 서식(날짜서식이 아니더라도 상관없습니다)을 넣어두면 자신이 애용하는 서식을 쉽게 적용할 수 도 있을 겁니다.<br> 
+      <br>
+      오늘은 여기까지입니다.&nbsp;<br>
+      </p>         
+      </td>                       
+  </tr>                       
+  <tr>                    
+    <td width="128" valign="top"></td>                    
+    <td width="588" valign="top" class="tdcont">                    
+      <p>    <a href="../list-sjoo.htm">목차</a> | <a href="ottool08.htm">이전</a>          
+      | 다음    </td>                              
+  </tr>                       
+</table>                       
+                       
+　<!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation-->
+<!-- <table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+<table border="0" cellpadding="2" cellspacing="0" style="border-collapse: collapse; border-left-width: 1; border-right-width: 1; border-top: 1px solid #6699FF; border-bottom-width: 1" bordercolor="#111111" width="100%" id="AutoNumber2">
+  <tr>
+    <td width="20%" rowspan="2" align="center">
+    <a target="_top" href="http://officetutor.com">
+      <img border="0" src="http://www.officetutor.co.kr/images/officetutor_footer.gif" width="137" height="22"></a></td>
+    <td width="10%" align="center">
+    <a target="_top" href="http://www.officetutor.co.kr/html/qa.htm">
+    <img border="0" src="http://www.officetutor.co.kr/html/images/qa.gif" width="42" height="37"></a></td>
+    <td width="10%" align="center">
+    <a target="_top" href="http://officetutor.com/books">
+    <img border="0" src="http://www.officetutor.co.kr/html/images/book.gif" width="53" height="41"></a></td>
+    <td width="11%" align="center">
+    <a target="_top" href="http://officetutor.com/shop">
+    <img border="0" src="http://www.officetutor.co.kr/html/images/shop.gif" width="49" height="41"></a></td>
+    <td width="10%" align="center">
+    <p align="center"><a target="_top" href="http://officetutor.com/lesson/">
+    <img border="0" src="http://www.officetutor.co.kr/images/officexplogo.gif" width="34" height="34"></a></td>
+    <td width="39%" align="center" rowspan="2">
+    <p align="left"><font size="1">이 페이지의 저작권은 (주)오피스튜터와 각 컨텐츠 제공자에게 있습니다. 내용의 무단    
+    복제를 금합니다.<br>   
+    Copyright ⓒ <a href="http://www.officetutor.com/aboutus.htm">OfficeTutor.com</a></font></td>   
+  </tr>
+  <tr>
+    <td width="10%" align="center">
+    <a href="http://www.officetutor.co.kr/html/qa.htm" target="_top">
+    묻고답하기</a></td>
+    <td width="10%" align="center">
+    <a href="http://officetutor.com/books" target="_top">
+    오튜책방</a></td>
+    <td width="11%" align="center">
+    <a href="http://officetutor.com/shop" target="_top">
+    제품구입</a></td>
+    <td width="10%" align="center">
+    <a target="_top" href="http://officetutor.com/lesson/">오피스강좌</a></td>
+  </tr>
+</table>
+
+</td></tr><!--msnavigation--></table></body></html>

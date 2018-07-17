@@ -1,0 +1,73 @@
+<html>
+<head>
+<style>
+ A{color:red}
+ .sb{DISPLAY: none; MARGIN-LEFT: 13px; MARGIN-TOP: 0px;}
+ .mn{cursor:hand}
+ .p{font-size:6px}
+ body{font-family:tahoma;font-size:11px;}
+</style>
+<SCRIPT language=javascript>
+
+var old_menu = '';
+
+function menuclick(v) {
+ if( old_menu != v ) {
+  if( old_menu !='' ) {
+   old_menu.style.display = 'none';
+  }
+  document.all('s'+v).innerText='─';
+  document.all('sb'+v).style.display='block';
+  old_menu = v;
+
+ } else {
+  document.all('s'+v).innerText='┼';
+  document.all('sb'+v).style.display='none';
+ 
+  old_menu = '';
+ }
+}
+
+//셀렉트에 옵션항목을 추가
+function ck(v1,v2){
+ var aIdx=document.f.sel.options.length;
+ var str=v2;
+ var itm= new Option(str);
+ document.f.sel.options[aIdx]=itm;
+ document.f.sel.options[aIdx].value=v1;
+}
+
+//선택 옵션항목을 제거
+function dl(sel){
+ sel.options[sel.selectedIndex]=null;
+}
+
+</SCRIPT>
+</head>
+<body>
+<form name=f>
+ <select name=sel multiple size=5 onchange=alert(this.value)>
+  <option value='http://www.google.co.kr'>구글
+ </select>
+ <input type=button onclick=dl(this.form.sel) value=제거>
+</form>
+<sup><span id=s1 class=p>┼</span></sup>
+
+<SPAN onclick="menuclick(1);" class=mn>메일</span>
+ <span id=sb1 class=sb>
+  <a href=# onClick="ck('http://www.daum.net','한메일')" >한메일</a><br>
+  <a href=# onClick="ck('http://www.kebi.com','깨비메일')">깨비메일</a><br>
+ </span>
+
+<br>
+
+<sup><span id=s2 class=p>┼</span></sup>
+
+<SPAN onclick="menuclick(2);" class=mn>검색엔진</span>
+ <span id=sb2 class=sb>
+  <a href=# onClick="ck('http://kr.yahoo.com','야후')">야후</a><br>
+  <a href=# onClick="ck('http://www.naver.com','네이버')">네이버</a><br>
+  <a href=# onClick="ck('http://www.hanmir.com','한미르')">한미르</a><br>
+ </span>
+</body>
+</html>

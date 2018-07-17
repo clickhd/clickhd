@@ -1,0 +1,31 @@
+<html>
+<head>
+<script language="JavaScript">
+function itemadd()
+{
+ var temp=prompt("항목의 내용을 입력하세요", "");
+ var k=document.ff.itemd.options.length;
+ newItem=new Option(temp);
+
+ if(temp!=null){
+   document.ff.itemd.options[k]=newItem;
+ }
+}
+</script>
+
+</head>
+
+<body>
+<font size="6"><b>항목을 입력 또는 삭제합니다.</font><br><br>
+<form name=ff>
+<select name="itemd" size="10" multiple>
+ <option >정보과학
+</select>
+<br><br>
+<input type="button" value="항목추가" onClick="itemadd()">
+<input type="button" value="항목제거" onClick="itemremoval()">
+</form>
+
+</body>
+</html>
+

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> New Document </TITLE>
+<style type="text/css">
+<!--
+
+BODY,TD{font-size:9pt;font-family:tahoma;color:black;}
+
+.h1{font-size:9pt;font-family:굴림;color:black}
+.h2{font-size:10pt;font-family:굴림;color:black}
+
+-->
+</style>
+</HEAD>
+
+<BODY>
+<!-- <body topmargin=0 leftmargin=0 marginwidth=0 marginheight=0> 프레임에서 여백없음 -->
+<table background="img\bg_1.jpg" bgproperties="fixed" border=1 cellpadding="4" cellspacing="0" bordercolor="black">
+<FORM>
+<tr>
+	<td bgcolor="#9999ff">신청카드유형</td>
+	<td colspan="2">
+		<input type="radio" checked>신규
+		<input type="radio">추가
+		<input type="radio">교체
+	</td>
+	<td bgcolor="#9999ff">교체카드번호</td>
+	<td>
+		<input type="text" size=4>─
+		<input type="text" size=4>─
+		<input type="text" size=4>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#9999ff" rowspan="2">성명</td>
+	<td bgcolor="#ffcc99">한글</td>
+	<td><input type="text"></td>
+	<td bgcolor="#9999ff">영문</td>
+	<td><input type="text"></td>
+</tr>
+<tr>
+	<td bgcolor="#ffcc99">주민등록번호</td>
+	<td><input type="text" size=6>─<input type="text" size=7></td>
+	<td bgcolor="#9999ff">전자우편</td>
+	<td><input type="text"></td>
+</tr>
+<tr>
+	<td bgcolor="#9999ff" rowspan="4">직장</td>
+	<td bgcolor="#ffcc99">직장명</td>
+	<td><input type="text"></td>
+	<td bgcolor="#9999ff">부서</td>
+	<td><input type="text"></td>
+</tr>
+<tr>
+	<td bgcolor="#ffcc99">직위</td>
+	<td><input type="text"></td>
+	<td bgcolor="#9999ff">배우자성명</td>
+	<td><input type="text"></td>
+</tr>
+<tr>
+	<td bgcolor="#ffcc99">직장전화</td>
+	<td><input type="text"></td>
+	<td bgcolor="#9999ff">배우자주민번호</td>
+	<td><input type="text" size=6>─<input type="text" size=7></td>
+</tr>
+<tr>
+	<td bgcolor="#ffcc99">직장주소</td>
+	<td colspan=3><input type="text" size="50"></td>
+</tr>
+<tr>
+	<td rowspan="2" bgcolor="#9999ff">청구서</td>
+	<td bgcolor="#ffcc99">청구서수령지</td>
+	<td><input type="radio" checked>직장
+		<input type="radio">자택</td>
+	<td bgcolor="#9999ff">카드수령지</td>
+	<td><input type="radio" checked>직장
+		<input type="radio">자택</td>
+</tr>
+<tr>
+	<td bgcolor="#ffcc99">대금결재일</td>
+	<td colspan="3"><input type="radio" checked>5일
+		<input type="radio">11일
+		<input type="radio">15일
+		<input type="radio">22일
+		<input type="radio">26일</td>
+</tr>
+<tr>
+	<td bgcolor="#9999ff">건의사항</td>
+	<td colspan="4">
+		<textarea name="건의사항" rows="3" cols="50">건의할 내용을 이곳에 입력하세요.</textarea></td>
+</tr>
+<tr>
+	<td bgcolor="#9999ff">최종선택</td>
+	<td colspan="4"><input type="submit" name="전송" value="전송">
+		<input type="reset" name="취소" value="취소"></td>
+</tr>
+</form>
+</table>
+</BODY>
+</HTML>

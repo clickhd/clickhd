@@ -1,9 +1,10 @@
 <html>
 <head>
+<meta charset="utf-8">
 <script language="JavaScript">
 function itemadd()
 {
- var temp=prompt("Ç×¸ñÀÇ ³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä", "");
+ var temp=prompt("í•­ëª©ì˜ ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”", "");
  var k=document.ff.itemd.options.length;
  newItem=new Option(temp);
 
@@ -16,14 +17,14 @@ function itemadd()
 </head>
 
 <body>
-<font size="6"><b>Ç×¸ñÀ» ÀÔ·Â ¶Ç´Â »èÁ¦ÇÕ´Ï´Ù.</font><br><br>
+<font size="6"><b>í•­ëª©ì„ ì…ë ¥ ë˜ëŠ” ì‚­ì œí•©ë‹ˆë‹¤.</font><br><br>
 <form name=ff>
 <select name="itemd" size="10" multiple>
- <option >Á¤º¸°úÇĞ
+ <option >ì •ë³´ê³¼í•™
 </select>
 <br><br>
-<input type="button" value="Ç×¸ñÃß°¡" onClick="itemadd()">
-<input type="button" value="Ç×¸ñÁ¦°Å" onClick="itemremoval()">
+<input type="button" value="í•­ëª©ì¶”ê°€" onClick="itemadd()">
+<input type="button" value="í•­ëª©ì œê±°" onClick="itemremoval()">
 </form>
 
 </body>
